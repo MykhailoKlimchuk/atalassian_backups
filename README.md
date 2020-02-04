@@ -2,11 +2,11 @@
 This script is created for automatic backups and uploading the backups on Google Drive
 
 backup_data.json:
-site: name of your atlassian site
-user_name: user with permission for backup
-api_token: user token for use atlassian api. get here https://id.atlassian.com/manage/api-tokens
-google_drive_confluence_folder_id: folder id on google drive for upload confluence backup
-google_drive_jira_folder_id: folder id on google drive for upload jira backup
+1. site: name of your atlassian site
+2. user_name: user with permission for backup
+3. api_token: user token for use atlassian api. get here https://id.atlassian.com/manage/api-tokens
+4. google_drive_confluence_folder_id: folder id on google drive for upload confluence backup
+5. google_drive_jira_folder_id: folder id on google drive for upload jira backup
 
 you need file credentials.json for use google drive api
 this file you can get here: https://developers.google.com/drive/api/v3/quickstart/python (Step 1. Click on button "Enable the Drive API")
