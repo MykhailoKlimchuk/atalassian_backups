@@ -1,0 +1,7 @@
+{
+  "site": "site",
+  "user_name": "user_name",
+  "api_token": "api_token",
+  "google_drive_confluence_folder_id": "google_drive_confluence_folder_id",
+  "google_drive_jira_folder_id": "google_drive_jira_folder_id"
+}

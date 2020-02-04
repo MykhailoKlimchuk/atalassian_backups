@@ -1,0 +1,10 @@
+/venv
+/.idea
+/.git
+/__pycache__
+/confluence_backups
+/jira_backups
+credentials.json
+log.log
+timestamp_backups.pickle
+token.pickle
