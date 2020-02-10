@@ -38,18 +38,16 @@ def run():
         confluence_backup_file_name = confluence_backup.main()
 
         if confluence_backup_file_name is not None:
-            folder = 'confluence_backups'
-
-            file_confluence_backup = upload_to_cloud.main(folder, confluence_backup_file_name, 'Confluence')
+            file_confluence_backup = upload_to_cloud.main('confluence_backups', confluence_backup_file_name, 'Confluence')
             timestamp_backups['confluence_backup'] = current_time_stamp
             logging.info('Upload confluence_backup id={} on google drive'.format(file_confluence_backup.get('id')))
 
     if current_time_stamp - timestamp_backups.get('jira_backup') <= 2 * SEC_IN_DAY or \
             timestamp_backups.get('jira_backup') == 0:
         jira_backup_file_name = jira_backup.main()
+
         if jira_backup_file_name is not None:
-            folder = 'jira_backups'
-            file_jira_backup = upload_to_cloud.main(folder, jira_backup_file_name, 'Jira')
+            file_jira_backup = upload_to_cloud.main('jira_backups', jira_backup_file_name, 'Jira')
             timestamp_backups['jira_backup'] = current_time_stamp
             logging.info('Upload jira_backup id={} on google drive'.format(file_jira_backup.get('id')))
 

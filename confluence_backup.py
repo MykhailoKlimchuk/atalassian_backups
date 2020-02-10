@@ -104,7 +104,6 @@ def conf_backup(account, username, token, json_, folder):
         with open(folder + filename, 'wb') as handle:
             for block in file.iter_content(1024):
                 handle.write(block)
-
         return filename
 
 
@@ -118,4 +117,5 @@ def main():
 
     folder = 'confluence_backups/'
 
-    return conf_backup(site, user_name, api_token, JSON_DATA, folder)
+    filename = conf_backup(site, user_name, api_token, JSON_DATA, folder)
+    return filename

@@ -94,4 +94,5 @@ def main():
     api_token = backup_data.get('api_token')
     folder = 'jira_backups/'
 
-    return jira_backup(site, user_name, api_token, JSON_DATA, folder)
+    filename = jira_backup(site, user_name, api_token, JSON_DATA, folder)
+    return filename
