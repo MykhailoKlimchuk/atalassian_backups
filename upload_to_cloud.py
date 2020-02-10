@@ -23,7 +23,6 @@ print(BACKUPS_FOLDERS)
 
 def main(folder_name, file_name, source):
     credentials = None
-
     if os.path.exists('token.pickle'):
         with open('token.pickle', 'rb') as token:
             credentials = pickle.load(token)

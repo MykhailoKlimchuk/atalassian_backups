@@ -105,7 +105,6 @@ def conf_backup(account, username, token, json_, folder):
             for block in file.iter_content(1024):
                 handle.write(block)
 
-        # print(filename + ' downloaded to ' + folder)
         return filename
 
 

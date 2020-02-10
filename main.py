@@ -47,7 +47,6 @@ def run():
     if current_time_stamp - timestamp_backups.get('jira_backup') <= 2 * SEC_IN_DAY or \
             timestamp_backups.get('jira_backup') == 0:
         jira_backup_file_name = jira_backup.main()
-
         if jira_backup_file_name is not None:
             folder = 'jira_backups'
             file_jira_backup = upload_to_cloud.main(folder, jira_backup_file_name, 'Jira')
