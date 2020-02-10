@@ -44,7 +44,6 @@ def main(folder_name, file_name, source):
 
     folders = BACKUPS_FOLDERS.get(source)
     os.chdir(folder_name)
-
     file_metadata = {'name': file_name,
                      'parents': folders}
     media = MediaFileUpload(file_name,

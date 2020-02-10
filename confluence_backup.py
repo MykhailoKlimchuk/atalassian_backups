@@ -117,5 +117,4 @@ def main():
 
     folder = 'confluence_backups/'
 
-    filename = conf_backup(site, user_name, api_token, JSON_DATA, folder)
-    return filename
+    return conf_backup(site, user_name, api_token, JSON_DATA, folder)
