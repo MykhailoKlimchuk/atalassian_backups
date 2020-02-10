@@ -29,13 +29,13 @@ def conf_backup(account, username, token, json_, folder):
         backup_response = int(re.search('(?<=<Response \[)(.*?)(?=\])', str(backup_start)).group(1))
     except AttributeError:
         print(backup_start.text)
-        logging.error(backup_start.text)
+        logging.error('CONFLUENCE: ' + backup_start.text)
         return
 
     # Check backup startup response is 200 if not print error and exit.
     if backup_response != 200:
         print(backup_start.text)
-        logging.error(backup_start.text)
+        logging.error('CONFLUENCE: ' + backup_start.text)
         return
     else:
         print('Backup starting...')
@@ -76,7 +76,7 @@ def conf_backup(account, username, token, json_, folder):
         # Catch any instance of the of word 'error' in the response and exit script.
         elif error.casefold() in progress_req.text:
             print(progress_req.text)
-            logging.error(progress_req.text)
+            logging.error('CONFLUENCE: ' + progress_req.text)
 
             return
 
@@ -106,6 +106,7 @@ def conf_backup(account, username, token, json_, folder):
                 handle.write(block)
 
         # print(filename + ' downloaded to ' + folder)
+        return filename
 
 
 def main():
@@ -118,4 +119,4 @@ def main():
 
     folder = 'confluence_backups/'
 
-    conf_backup(site, user_name, api_token, JSON_DATA, folder)
+    return conf_backup(site, user_name, api_token, JSON_DATA, folder)

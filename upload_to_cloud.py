@@ -8,7 +8,6 @@ from googleapiclient.http import MediaFileUpload
 
 __author__ = 'Mykhailo Klimchuk'
 
-
 SCOPES = ['https://www.googleapis.com/auth/drive']  # If modifying these scopes, delete the file token.pickle.
 
 with open('backup_data.json', 'r') as backup_data_json:
@@ -22,7 +21,7 @@ BACKUPS_FOLDERS = {
 print(BACKUPS_FOLDERS)
 
 
-def main(file_name, source):
+def main(folder_name, file_name, source):
     credentials = None
 
     if os.path.exists('token.pickle'):
@@ -42,7 +41,10 @@ def main(file_name, source):
 
     service = build('drive', 'v3', credentials=credentials)
 
+    file_name += '.zip'
+
     folders = BACKUPS_FOLDERS.get(source)
+    os.chdir(folder_name)
 
     file_metadata = {'name': file_name,
                      'parents': folders}
@@ -52,4 +54,5 @@ def main(file_name, source):
     file = service.files().create(body=file_metadata,
                                   media_body=media,
                                   fields='id').execute()
+    os.chdir('..')
     return file

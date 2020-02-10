@@ -8,7 +8,6 @@ JSON_DATA = b'{"cbAttachments": "true", "exportToCloud": "true"}'  # Constants (
 
 
 def jira_backup(account, username, token, json_, folder):
-
     # Create the full base url for the JIRA instance using the account name.
     url = 'https://' + account + '.atlassian.net'
 
@@ -23,7 +22,7 @@ def jira_backup(account, username, token, json_, folder):
     # Catch error response from backup start and exit if error found.
     if 'error' in backup_req.text:
         print(backup_req.text)
-        logging.error(backup_req.text)
+        logging.error('JIRA: ' + backup_req.text)
         return
 
     # Get task ID of backup.
@@ -45,7 +44,7 @@ def jira_backup(account, username, token, json_, folder):
             task_progress = int(re.search('(?<=progress":)(.*?)(?=,)', progress_req.text).group(1))
         except AttributeError:
             print(progress_req.text)
-            logging.error(progress_req.text)
+            logging.error('JIRA: ' + progress_req.text)
 
             return
 
@@ -54,7 +53,7 @@ def jira_backup(account, username, token, json_, folder):
             last_progress = task_progress
         elif 'error' in progress_req.text:
             print(progress_req.text)
-            logging.error(progress_req.text)
+            logging.error('JIRA: ' + progress_req.text)
 
             return
 
@@ -85,6 +84,8 @@ def jira_backup(account, username, token, json_, folder):
 
         print(filename + 'downloaded to ' + folder)
 
+        return filename
+
 
 def main():
     with open('backup_data.json', 'r') as backup_data_json:
@@ -95,4 +96,4 @@ def main():
     api_token = backup_data.get('api_token')
     folder = 'jira_backups/'
 
-    jira_backup(site, user_name, api_token, JSON_DATA, folder)
+    return jira_backup(site, user_name, api_token, JSON_DATA, folder)
