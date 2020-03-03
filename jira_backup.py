@@ -8,6 +8,7 @@ JSON_DATA = b'{"cbAttachments": "true", "exportToCloud": "true"}'  # Constants (
 
 
 def jira_backup(account, username, token, json_, folder):
+
     # Create the full base url for the JIRA instance using the account name.
     url = 'https://' + account + '.atlassian.net'
 
@@ -64,9 +65,6 @@ def jira_backup(account, username, token, json_, folder):
 
         download = re.search('(?<=result":")(.*?)(?=\",)', progress_req.text).group(1)
 
-        # print('Backup complete, downloading files.')
-        # print('Backup file can also be downloaded from ' + url + '/plugins/servlet/' + download)
-
         logging.info('Backup complete, downloading file to: {}'.format(folder))
         logging.info('Backup file can also be downloaded from ' + url + '/plugins/servlet/' + download)
 
@@ -82,6 +80,8 @@ def jira_backup(account, username, token, json_, folder):
             for block in file.iter_content(1024):
                 handle.write(block)
 
+        print(filename + 'downloaded to ' + folder)
+        
         return filename
 
 
@@ -92,6 +92,6 @@ def main():
     site = backup_data.get('site')
     user_name = backup_data.get('user_name')
     api_token = backup_data.get('api_token')
-    folder = 'jira_backups/'
+    folder = 'jira_backups\\'
 
     return jira_backup(site, user_name, api_token, JSON_DATA, folder)
