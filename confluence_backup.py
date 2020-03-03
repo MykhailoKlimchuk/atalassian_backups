@@ -100,10 +100,11 @@ def conf_backup(account, username, token, json_, folder):
         file = session.get(url + '/download/' + file_name, stream=True)
 
         file.raise_for_status()
-
         with open(folder + filename, 'wb') as handle:
             for block in file.iter_content(1024):
                 handle.write(block)
+
+        # print(filename + ' downloaded to ' + folder)
         return filename
 
 
@@ -115,6 +116,6 @@ def main():
     user_name = backup_data.get('user_name')
     api_token = backup_data.get('api_token')
 
-    folder = 'confluence_backups/'
+    folder = 'confluence_backups\\'
 
     return conf_backup(site, user_name, api_token, JSON_DATA, folder)
