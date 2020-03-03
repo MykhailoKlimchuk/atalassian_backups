@@ -8,6 +8,7 @@ from googleapiclient.http import MediaFileUpload
 
 __author__ = 'Mykhailo Klimchuk'
 
+
 SCOPES = ['https://www.googleapis.com/auth/drive']  # If modifying these scopes, delete the file token.pickle.
 
 with open('backup_data.json', 'r') as backup_data_json:
@@ -18,11 +19,10 @@ BACKUPS_FOLDERS = {
     'Jira': [backup_data.get('google_drive_jira_folder_id')],
 }
 
-print(BACKUPS_FOLDERS)
-
 
 def main(folder_name, file_name, source):
     credentials = None
+
     if os.path.exists('token.pickle'):
         with open('token.pickle', 'rb') as token:
             credentials = pickle.load(token)
@@ -39,11 +39,10 @@ def main(folder_name, file_name, source):
             pickle.dump(credentials, token)  # Save the credentials for the next run
 
     service = build('drive', 'v3', credentials=credentials)
-
-    file_name += '.zip'
-
+   
     folders = BACKUPS_FOLDERS.get(source)
     os.chdir(folder_name)
+
     file_metadata = {'name': file_name,
                      'parents': folders}
     media = MediaFileUpload(file_name,
