@@ -6,5 +6,4 @@
 /jira_backups
 credentials.json
 log.log
-timestamp_backups.pickle
 token.pickle
